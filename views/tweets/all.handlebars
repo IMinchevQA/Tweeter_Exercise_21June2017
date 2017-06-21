@@ -1,0 +1,37 @@
+<h2>Tweets</h2>
+<form action="/tweets/all" method="GET">
+  <input type="text" name="search" />
+  <input type="submit" value="Search" />
+</form>
+
+{{#each tweets}}
+  <div class="mb60 thread-details">
+    <h3>Title: <i>{{this.title}}</i></h3>
+    <p><b>Content:</b> <i>{{this.message}}</i></p>
+    <p><b>Tweeted by:</b> <i>{{this.creator.username}}</i></p>
+    <p><b>Likes:</b> <i>{{this.likes}}</i>&nbsp;&nbsp;&nbsp;<b>Dislikes:</b><i>{{this.dislikes}}</i></p>
+    <p><b>Tags:</b></p>
+    {{#each this.hashTags}}
+        <a class="btn btn-gray" href="/tag/{{this}}"><i>#{{this}}</i></a>
+      &nbsp&nbsp
+    {{/each}}
+    <p><b>Tweet date:</b> <i>{{this.date}}</i></p>    
+    {{#if ../currentUser}}
+      {{#hasLiked ../currentUser this._id}}
+        <!--<form id="dislike-form" action="/tweets/dislike/{{../this._id}}" method="POST"></form> Does not functions, it always sends one and the same tweetID - strange behaviour-->
+        <!--<a class="btn btn-danger" href="javascript:document.getElementById('dislike-form').submit()">Dislike</a>  -->
+          <a class="btn btn-danger" href="/tweets/dislike/{{../this._id}}">Dislike</a>
+      {{else}}
+        <!--<form id="like-form" action="/tweets/like/{{../this._id}}" method="POST"><p>{{../this._id}}</p></form> Does not functions, it always sends one and the same tweetID - strange behaviour-->
+        <!--<a class="btn btn-primary" href="javascript:document.getElementById('like-form').submit()">Like</a>-->
+        <a class="btn btn-primary" href="/tweets/like/{{../this._id}}">Like</a>
+      {{/hasLiked}}
+    {{/if}}
+    {{#if ../isAdmin}}
+      <a class="btn btn-warning" href="/tweets/edit/{{this._id}}/{{this.title}}">Edit</a>
+      <a class="btn btn-danger" href="/tweets/delete/{{this._id}}/{{this.title}}">Delete</a>
+    {{/if}}    
+  </div>
+{{else}}
+  <h2>No tweets available!</h2>
+{{/each}}

@@ -1,0 +1,24 @@
+<form action="/tweets/delete/{{tweet._id}}/{{tweet.title}}" method="POST">
+  <h3>Delete tweet</h3>
+  <div class="form-group has-warning has-feedback">
+    <label for="title">Title:</label>
+    <br/>
+    <input class="form-control" id="title" type="text" name="title" value="{{tweet.title}}" disabled/>
+    <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+  </div>
+  <br/>
+  <br/>
+  <div class="form-group has-warning has-feedback">
+    <label for="message">Message:</label>
+    <br/>
+    <textarea class="form-control" id="message" type="text" name="message" disabled>{{tweet.message}}</textarea>
+    <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+    <div/>
+    <br/>
+    <p><b>Posted by:</b> <i>{{tweet.creator.username}}</i></p>
+    <br/>
+    <br/>
+    <input class="btn btn-danger" type="submit" value="Delete"/>
+    <br/>
+  </div>
+</form>

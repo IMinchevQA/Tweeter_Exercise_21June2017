@@ -1,0 +1,84 @@
+h1 {
+    color: red
+}
+.container {
+    padding-left: 25%
+}
+.menu {
+    list-style-type: none;
+    padding-left: 0;
+}
+.menu li {
+    display: inline-block
+}
+.menu li:after {
+    content: "\00a0";
+}
+
+.mb60 {
+    margin-bottom: 60px;
+}
+
+.thread-details {
+    width: 50%;
+}
+
+.car-details img {
+    width: 100%;
+}
+
+.font-3x {
+    font-size: 3em;
+}
+
+.align-right {
+    float:right;
+}
+
+.btn {
+  padding: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  color: inherit;
+  display: inline-block;
+  text-decoration-line: none;
+  margin: 5px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #2fa4e7;
+  border-color: #2fa4e7;
+}
+
+.btn-gray {
+   background-color: #D1D2D3;
+}
+
+.form-btn {
+  display: block;
+  margin-left: calc(30% + 15px);
+}
+
+/*th{
+  width: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
+  border: solid black 1px
+}
+
+td{
+  text-align: right;
+  padding-right: 10px;
+  border: solid black 1px
+  
+}*/
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
