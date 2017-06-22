@@ -261,26 +261,27 @@ module.exports = {
           res.render('tweets/all')
         })
     })
-    Tweet
-        .findById(currentTweetId)
-        .then(tweet => {
-          removeUsersLikes
-          .then(cntUsersLikedFound => {
-            removeUsersDislikes
-            .then(cntUsersDislikedFound => {
-              removeUserStartedTweet
-              .then(success => {
-                tweet.remove()
-                .then(() => {
-                  res.redirect('/tweets/all')
-                }).catch(err => {
-                  res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
-                  res.render('tweets/all')
-                })
-              }).catch(err => {
-                res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
-                res.render('tweets/all')
-              })
+
+    removeUsersLikes
+      .then(cntUsersLikedFound => {
+        removeUsersDislikes
+          .then(cntUsersDislikedFound => {
+            removeUserStartedTweet
+            .then(successMsg => {
+              Tweet
+               .findById(currentTweetId)
+               .then(tweet => {
+                 tweet.remove()
+                   .then(() => {
+                     res.redirect('/tweets/all')
+                   }).catch(err => {
+                     res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+                     res.render('tweets/all')
+                   })
+               }).catch(err => {
+                 res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+                 res.render('tweets/all')
+               })
             }).catch(err => {
               res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
               res.render('tweets/all')
@@ -289,9 +290,44 @@ module.exports = {
             res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
             res.render('tweets/all')
           })
-        }).catch(err => {
-          res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
-          res.render('tweets/all')
-        })
+      }).catch(err => {
+        res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+        res.render('tweets/all')
+      })
   }
 }
+
+    // WRONG query - fails when trying to execute removeUserStartedTweet
+    // The wrong code below is intentionally leaved(unused of course) as part of the actual file.
+    // Tweet
+    //     .findById(currentTweetId)
+    //     .then(tweet => {
+    //       removeUsersLikes
+    //       .then(cntUsersLikedFound => {
+    //         removeUsersDislikes
+    //         .then(cntUsersDislikedFound => {
+    //           removeUserStartedTweet
+    //           .then(success => {
+    //             tweet.remove()
+    //             .then(() => {
+    //               res.redirect('/tweets/all')
+    //             }).catch(err => {
+    //               res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+    //               res.render('tweets/all')
+    //             })
+    //           }).catch(err => {
+    //             res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+    //             res.render('tweets/all')
+    //           })
+    //         }).catch(err => {
+    //           res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+    //           res.render('tweets/all')
+    //         })
+    //       }).catch(err => {
+    //         res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+    //         res.render('tweets/all')
+    //       })
+    //     }).catch(err => {
+    //       res.locals.globalError = err.errmsg ? err.message : errorHandler.handleMongooseError(err)
+    //       res.render('tweets/all')
+    //     })
